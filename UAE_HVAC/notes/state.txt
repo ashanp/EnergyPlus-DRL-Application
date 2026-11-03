@@ -1,0 +1,13 @@
+State =
+[
+    Outdoor Temperature,
+    Outdoor Relative Humidity,
+    Diffuse Solar Radiation,
+    Direct Solar Radiation,
+    Occupant Count,
+    Indoor Temperature,
+    Indoor Relative Humidity,
+    Current Cooling Setpoint,
+    Time of Day,
+    Day of Year
+]

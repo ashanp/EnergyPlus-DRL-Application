@@ -1,0 +1,1063 @@
+!=======================================================================
+! UAE DUBAI HVAC BASELINE MODEL
+! EnergyPlus 26.1.0
+!
+! Location:
+!   Dubai World Central / Al Maktoum International Airport
+!
+! Weather:
+!   ARE_DU_Dubai.World.Central.Intl.AP-Maktoum.Intl.AP.411945_TMYx.2007-2021.epw
+!
+! Building:
+!   Single zone
+!   10m x 10m x 3m
+!   100 m2 floor area
+!   300 m3 approximate volume
+!
+! HVAC:
+!   Packaged Terminal Air Conditioner
+!   DX cooling
+!   Electric heating
+!   Autosized
+!
+! Cooling thermostat:
+!   24 C
+!
+! Designed as a baseline for later:
+!   PPO / DQN HVAC optimisation
+!
+!=======================================================================
+
+
+Version,
+    26.1;
+
+
+!=======================================================================
+! SIMULATION CONTROL
+!=======================================================================
+
+SimulationControl,
+    Yes,             !- Do Zone Sizing Calculation
+    Yes,             !- Do System Sizing Calculation
+    No,              !- Do Plant Sizing Calculation
+    Yes,             !- Run Simulation for Sizing Periods
+    Yes;             !- Run Simulation for Weather File Run Periods
+
+
+SizingPeriod:DesignDay,
+    Dubai Winter 99% Design Conditions, !- Name
+    1,                        !- Month
+    21,                       !- Day of Month
+    WinterDesignDay,          !- Day Type
+    11.0,                     !- Maximum Dry-Bulb Temperature [C]
+    0.0,                      !- Daily Dry-Bulb Temperature Range [C]
+    ,                         !- Default Safety Factor
+    ,                         !- Fraction of Daily Range Schedule Name
+    WetBulb,                  !- Humidity Condition Type
+    11.0,                     !- Wetbulb or DewPoint at Maximum Dry-Bulb [C]
+    ,                         !- Humidity Condition Day Schedule Name
+    ,                         !- Humidity Ratio at Maximum Dry-Bulb [kgWater/kgDryAir]
+    ,                         !- Enthalpy at Maximum Dry-Bulb [J/kg]
+    ,                         !- Daily Wet-Bulb Temperature Range [C]
+    101325.0,                 !- Barometric Pressure [Pa]
+    3.0,                      !- Wind Speed [m/s]
+    180,                      !- Wind Direction [deg]
+    No,                       !- Rain Indicator
+    No,                       !- Snow Indicator
+    No,                       !- Daylight Saving Time Indicator
+    ASHRAEClearSky,           !- Solar Model Indicator
+    ,                         !- Beam Solar Day Schedule Name
+    ,                         !- Diffuse Solar Day Schedule Name
+    ,                         !- ASHRAE Clear Sky Optical Depth For Beam Irradiance (taub)
+    ,                         !- ASHRAE Clear Sky Optical Depth For Diffuse Irradiance (taud)
+    0.0;                      !- Sky Clearness (0.0 = No Solar Gain)
+
+
+SizingPeriod:DesignDay,
+    Dubai Summer 1% Design Conditions,
+    7,
+    21,
+    SummerDesignDay,
+    42.0,
+    9.0,
+    ,
+    ,
+    WetBulb,
+    27.0,
+    ,
+    ,
+    ,
+    ,
+    101325.0,
+    3.0,
+    180,
+    No,
+    No,
+    No,
+    ASHRAEClearSky,
+    ,
+    ,
+    ,
+    ,
+    1.0;
+
+
+Timestep,
+    4;
+
+
+!=======================================================================
+! BUILDING
+!=======================================================================
+
+Building,
+    UAE Dubai Baseline,
+    0.0,
+    Suburbs,
+    0.04,
+    0.4,
+    FullExteriorWithReflections,
+    25;
+
+
+!=======================================================================
+! LOCATION
+!
+! The EPW file supplied with -w is the actual weather source.
+!=======================================================================
+
+Site:Location,
+    Dubai World Central,
+    24.896,
+    55.161,
+    4.0,
+    36.0;                    !- Elevation [m]
+
+
+!=======================================================================
+! GROUND TEMPERATURE
+!=======================================================================
+
+Site:GroundTemperature:BuildingSurface,
+    24.0,
+    24.0,
+    25.0,
+    27.0,
+    30.0,
+    32.0,
+    33.0,
+    33.0,
+    32.0,
+    30.0,
+    27.0,
+    25.0;
+
+
+!=======================================================================
+! GLOBAL GEOMETRY
+!=======================================================================
+
+GlobalGeometryRules,
+    UpperLeftCorner,
+    CounterClockWise,
+    World;
+
+
+!=======================================================================
+! ZONE
+!=======================================================================
+
+Zone,
+    Main Zone,               !- Name
+    0.0,                     !- Direction of Relative North [deg]
+    0.0,                     !- X Origin [m]
+    0.0,                     !- Y Origin [m]
+    0.0,                     !- Z Origin [m]
+    1,                       !- Type
+    1,                       !- Multiplier
+    autocalculate,           !- Ceiling Height [m]
+    autocalculate;           !- Volume [m3]
+
+
+!=======================================================================
+! MATERIALS
+!=======================================================================
+
+Material,
+    External Wall Material,
+    MediumRough,
+    0.200,
+    1.40,
+    2200.0,
+    900.0,
+    0.90,
+    0.70,
+    0.70;
+
+
+Material,
+    Roof Material,
+    MediumRough,
+    0.180,
+    1.40,
+    2200.0,
+    900.0,
+    0.90,
+    0.70,
+    0.70;
+
+
+Material,
+    Floor Material,
+    MediumRough,
+    0.150,
+    1.40,
+    2200.0,
+    900.0,
+    0.90,
+    0.70,
+    0.70;
+
+
+!=======================================================================
+! WINDOW
+!=======================================================================
+
+WindowMaterial:SimpleGlazingSystem,
+    Double Glazing,
+    2.70,
+    0.40,
+    0.30;
+
+
+!=======================================================================
+! CONSTRUCTIONS
+!=======================================================================
+
+Construction,
+    External Wall Construction,
+    External Wall Material;
+
+
+Construction,
+    Roof Construction,
+    Roof Material;
+
+
+Construction,
+    Floor Construction,
+    Floor Material;
+
+
+Construction,
+    Window Construction,
+    Double Glazing;
+
+
+!=======================================================================
+! SOUTH WALL
+!=======================================================================
+
+BuildingSurface:Detailed,
+    South Wall,
+    Wall,
+    External Wall Construction,
+    Main Zone,
+    ,
+    Outdoors,
+    ,
+    SunExposed,
+    WindExposed,
+    0.5,
+    4,
+    0.0,0.0,0.0,
+    10.0,0.0,0.0,
+    10.0,0.0,3.0,
+    0.0,0.0,3.0;
+
+
+!=======================================================================
+! NORTH WALL
+!=======================================================================
+
+BuildingSurface:Detailed,
+    North Wall,
+    Wall,
+    External Wall Construction,
+    Main Zone,
+    ,
+    Outdoors,
+    ,
+    SunExposed,
+    WindExposed,
+    0.5,
+    4,
+    0.0,10.0,0.0,
+    10.0,10.0,0.0,
+    10.0,10.0,3.0,
+    0.0,10.0,3.0;
+
+
+!=======================================================================
+! EAST WALL
+!=======================================================================
+
+BuildingSurface:Detailed,
+    East Wall,
+    Wall,
+    External Wall Construction,
+    Main Zone,
+    ,
+    Outdoors,
+    ,
+    SunExposed,
+    WindExposed,
+    0.5,
+    4,
+    10.0,0.0,0.0,
+    10.0,10.0,0.0,
+    10.0,10.0,3.0,
+    10.0,0.0,3.0;
+
+
+!=======================================================================
+! WEST WALL
+!=======================================================================
+
+BuildingSurface:Detailed,
+    West Wall,
+    Wall,
+    External Wall Construction,
+    Main Zone,
+    ,
+    Outdoors,
+    ,
+    SunExposed,
+    WindExposed,
+    0.5,
+    4,
+    0.0,10.0,0.0,
+    0.0,0.0,0.0,
+    0.0,0.0,3.0,
+    0.0,10.0,3.0;
+
+
+!=======================================================================
+! ROOF
+!=======================================================================
+
+BuildingSurface:Detailed,
+    Roof,
+    Roof,
+    Roof Construction,
+    Main Zone,
+    ,
+    Outdoors,
+    ,
+    SunExposed,
+    WindExposed,
+    0.0,
+    4,
+    0.0,0.0,3.0,
+    10.0,0.0,3.0,
+    10.0,10.0,3.0,
+    0.0,10.0,3.0;
+
+
+!=======================================================================
+! FLOOR
+!=======================================================================
+
+BuildingSurface:Detailed,
+    Floor,
+    Floor,
+    Floor Construction,
+    Main Zone,
+    ,
+    Ground,
+    ,
+    NoSun,
+    NoWind,
+    0.0,
+    4,
+    0.0,0.0,0.0,
+    0.0,10.0,0.0,
+    10.0,10.0,0.0,
+    10.0,0.0,0.0;
+
+
+!=======================================================================
+! WINDOWS
+!
+! Each window = 4m x 1.5m = 6m2
+! Four windows = 24m2
+!=======================================================================
+
+FenestrationSurface:Detailed,
+    South Window,            !- Name
+    Window,                  !- Surface Type
+    Window Construction,     !- Construction Name
+    South Wall,              !- Building Surface Name
+    ,                        !- Outside Boundary Condition Object
+    1.0,                     !- View Factor to Ground
+    ,                        !- Frame and Divider Name
+    1.0,                     !- Multiplier
+    4,                       !- Number of Vertices
+    3.0, 0.0, 1.0,           !- Vertex 1 X,Y,Z [m]
+    7.0, 0.0, 1.0,           !- Vertex 2 X,Y,Z [m]
+    7.0, 0.0, 2.5,           !- Vertex 3 X,Y,Z [m]
+    3.0, 0.0, 2.5;           !- Vertex 4 X,Y,Z [m]
+
+FenestrationSurface:Detailed,
+    North Window,            !- Name
+    Window,                  !- Surface Type
+    Window Construction,     !- Construction Name
+    North Wall,              !- Building Surface Name
+    ,                        !- Outside Boundary Condition Object
+    1.0,                     !- View Factor to Ground
+    ,                        !- Frame and Divider Name
+    1.0,                     !- Multiplier
+    4,                       !- Number of Vertices
+    3.0, 10.0, 1.0,          !- Vertex 1 X,Y,Z [m]
+    7.0, 10.0, 1.0,          !- Vertex 2 X,Y,Z [m]
+    7.0, 10.0, 2.5,          !- Vertex 3 X,Y,Z [m]
+    3.0, 10.0, 2.5;          !- Vertex 4 X,Y,Z [m]
+
+FenestrationSurface:Detailed,
+    East Window,             !- Name
+    Window,                  !- Surface Type
+    Window Construction,     !- Construction Name
+    East Wall,               !- Building Surface Name
+    ,                        !- Outside Boundary Condition Object
+    1.0,                     !- View Factor to Ground
+    ,                        !- Frame and Divider Name
+    1.0,                     !- Multiplier
+    4,                       !- Number of Vertices
+    10.0, 3.0, 1.0,          !- Vertex 1 X,Y,Z [m]
+    10.0, 7.0, 1.0,          !- Vertex 2 X,Y,Z [m]
+    10.0, 7.0, 2.5,          !- Vertex 3 X,Y,Z [m]
+    10.0, 3.0, 2.5;          !- Vertex 4 X,Y,Z [m]
+
+FenestrationSurface:Detailed,
+    West Window,             !- Name
+    Window,                  !- Surface Type
+    Window Construction,     !- Construction Name
+    West Wall,               !- Building Surface Name
+    ,                        !- Outside Boundary Condition Object
+    1.0,                     !- View Factor to Ground
+    ,                        !- Frame and Divider Name
+    1.0,                     !- Multiplier
+    4,                       !- Number of Vertices
+    0.0, 7.0, 1.0,           !- Vertex 1 X,Y,Z [m]
+    0.0, 3.0, 1.0,           !- Vertex 2 X,Y,Z [m]
+    0.0, 3.0, 2.5,           !- Vertex 3 X,Y,Z [m]
+    0.0, 7.0, 2.5;           !- Vertex 4 X,Y,Z [m]
+
+
+!=======================================================================
+! SCHEDULE TYPE LIMITS
+!=======================================================================
+
+ScheduleTypeLimits,
+    Fraction,
+    0.0,
+    1.0,
+    Continuous;
+
+
+ScheduleTypeLimits,
+    Temperature,
+    -60.0,
+    200.0,
+    Continuous;
+
+
+ScheduleTypeLimits,
+    Control Type,
+    0,
+    4,
+    Discrete;
+
+
+!=======================================================================
+! OCCUPANCY
+!=======================================================================
+
+Schedule:Compact,
+    Occupancy Schedule,
+    Fraction,
+    Through: 12/31,
+    For: Weekdays,
+    Until: 08:00,
+    0.0,
+    Until: 09:00,
+    0.5,
+    Until: 18:00,
+    1.0,
+    Until: 19:00,
+    0.5,
+    Until: 24:00,
+    0.0,
+    For: Weekends WinterDesignDay Holiday AllOtherDays,
+    Until: 24:00,
+    0.0;
+
+
+ScheduleTypeLimits,
+    Activity,
+    0.0,
+    200.0,
+    Continuous;
+
+Schedule:Constant,
+    People Activity Schedule,
+    Activity,
+    120.0;
+
+People,
+    Main Zone Occupants,
+    Main Zone,
+    Occupancy Schedule,
+    People,
+    10,
+    ,
+    ,
+    0.3,
+    0.5,
+    People Activity Schedule;
+
+
+!=======================================================================
+! LIGHTING
+!=======================================================================
+
+Schedule:Compact,
+    Lighting Schedule,
+    Fraction,
+    Through: 12/31,
+    For: Weekdays,
+    Until: 08:00,
+    0.1,
+    Until: 09:00,
+    0.5,
+    Until: 18:00,
+    1.0,
+    Until: 19:00,
+    0.5,
+    Until: 24:00,
+    0.1,
+    For: Weekends WinterDesignDay Holiday AllOtherDays,
+    Until: 24:00,
+    0.1;
+
+
+Lights,
+    Main Zone Lights,
+    Main Zone,
+    Lighting Schedule,
+    LightingLevel,
+    800.0,
+    ,
+    ,
+    0.0,
+    0.42,
+    0.18,
+    1.0,
+    General;
+
+
+!=======================================================================
+! ELECTRICAL EQUIPMENT
+!=======================================================================
+
+Schedule:Compact,
+    Equipment Schedule,
+    Fraction,
+    Through: 12/31,
+    For: Weekdays,
+    Until: 08:00,
+    0.1,
+    Until: 09:00,
+    0.5,
+    Until: 18:00,
+    1.0,
+    Until: 19:00,
+    0.5,
+    Until: 24:00,
+    0.1,
+    For: Weekends WinterDesignDay Holiday AllOtherDays,
+    Until: 24:00,
+    0.1;
+
+
+ElectricEquipment,
+    Main Zone Equipment,
+    Main Zone,
+    Equipment Schedule,
+    EquipmentLevel,
+    1000.0,
+    ,
+    ,
+    0.30,
+    0.0,
+    0.0,
+    General;
+
+
+!=======================================================================
+! INFILTRATION
+!=======================================================================
+
+Schedule:Constant,
+    Infiltration Schedule,
+    Fraction,
+    1.0;
+
+
+ZoneInfiltration:DesignFlowRate,
+    Main Zone Infiltration,
+    Main Zone,
+    Infiltration Schedule,
+    Flow/Zone,
+    0.0003,
+    ,
+    ,
+    ,
+    1.0,                     !- Constant Term Coefficient
+    0.0,                     !- Temperature Term Coefficient
+    0.0,                     !- Velocity Term Coefficient
+    0.0;                     !- Velocity Squared Term Coefficient
+
+
+!=======================================================================
+! THERMOSTAT
+!
+! Heating = 20 C
+! Cooling = 24 C
+!=======================================================================
+
+Schedule:Compact,
+    Heating Setpoint Schedule,
+    Temperature,
+    Through: 12/31,
+    For: AllDays,
+    Until: 24:00,
+    20.0;
+
+
+Schedule:Compact,
+    Cooling Setpoint Schedule,
+    Temperature,
+    Through: 12/31,
+    For: AllDays,
+    Until: 24:00,
+    24.0;
+
+
+Schedule:Compact,
+    Thermostat Control Schedule,
+    Control Type,
+    Through: 12/31,
+    For: AllDays,
+    Until: 24:00,
+    4;
+
+
+ThermostatSetpoint:DualSetpoint,
+    Main Zone Dual Setpoint,
+    Heating Setpoint Schedule,
+    Cooling Setpoint Schedule;
+
+
+ZoneControl:Thermostat,
+    Main Zone Thermostat,
+    Main Zone,
+    Thermostat Control Schedule,
+    ThermostatSetpoint:DualSetpoint,
+    Main Zone Dual Setpoint;
+
+
+Sizing:Zone,
+    Main Zone,
+    SupplyAirTemperature,
+    14.0,
+    ,
+    SupplyAirTemperature,
+    50.0,
+    ,
+    0.009,
+    0.004,
+    ,
+    0.0,
+    0.0,
+    DesignDayWithLimit,
+    ,
+    ,
+    ,
+    ,
+    DesignDay,
+    ,
+    ,
+    ,
+    ,
+    ,
+    No,
+    NeutralSupplyAir,
+    autosize,
+    autosize,
+    ,
+    ,
+    ,
+    ,
+    ;
+
+
+!=======================================================================
+! HVAC TEMPLATE THERMOSTAT
+!
+! This is intentionally omitted because the direct thermostat above
+! is easier to use later with the EnergyPlus Python API.
+!=======================================================================
+
+
+!=======================================================================
+! HVAC AVAILABILITY
+!=======================================================================
+
+Schedule:Constant,
+    HVAC Availability Schedule,
+    Fraction,
+    1.0;
+
+
+!=======================================================================
+! HVAC
+!
+! Explicit PTAC configuration to avoid unsupported HVACTemplate:* objects.
+! Cooling coil: DX, Heating: Electric, Outdoor air: mixed via PTAC box.
+!=======================================================================
+
+ScheduleTypeLimits,
+    HVACTemplate Any Number;
+
+Schedule:Compact,
+    HVACTemplate-Always 4,
+    HVACTemplate Any Number,
+    Through: 12/31,
+    For: AllDays,
+    Until: 24:00,
+    4;
+
+Schedule:Compact,
+    HVACTemplate-Always 0,
+    HVACTemplate Any Number,
+    Through: 12/31,
+    For: AllDays,
+    Until: 24:00,
+    0;
+
+Schedule:Compact,
+    HVACTemplate-Always 1,
+    HVACTemplate Any Number,
+    Through: 12/31,
+    For: AllDays,
+    Until: 24:00,
+    1;
+
+ZoneHVAC:EquipmentConnections,
+    Main Zone,
+    Main Zone PTAC Equipment,
+    Main Zone PTAC PTAC Supply Inlet,
+    Main Zone PTAC PTAC Return,
+    Main Zone PTAC Zone Air Node,
+    Main Zone PTAC Return Outlet;
+
+ZoneHVAC:EquipmentList,
+    Main Zone PTAC Equipment,
+    SequentialLoad,
+    ZoneHVAC:PackagedTerminalAirConditioner,
+    Main Zone PTAC PTAC,
+    1,
+    1,
+    ,
+    ;
+
+ZoneHVAC:PackagedTerminalAirConditioner,
+    Main Zone PTAC PTAC,
+    HVAC Availability Schedule,
+    Main Zone PTAC PTAC Return,
+    Main Zone PTAC PTAC Supply Inlet,
+    OutdoorAir:Mixer,
+    Main Zone PTAC PTAC OA Mixing Box,
+    autosize,
+    autosize,
+    ,
+    ,
+    autosize,
+    autosize,
+    autosize,
+    Fan:OnOff,
+    Main Zone PTAC PTAC Supply Fan,
+    Coil:Heating:Electric,
+    Main Zone PTAC PTAC Heating Coil,
+    Coil:Cooling:DX:SingleSpeed,
+    Main Zone PTAC PTAC Cooling Coil,
+    DrawThrough,
+    HVACTemplate-Always 0;
+
+Fan:OnOff,
+    Main Zone PTAC PTAC Supply Fan,
+    HVACTemplate-Always 1,
+    0.7,
+    75,
+    autosize,
+    0.9,
+    1,
+    Main Zone PTAC PTAC Heating Coil Outlet,
+    Main Zone PTAC PTAC Supply Inlet;
+
+OutdoorAir:Mixer,
+    Main Zone PTAC PTAC OA Mixing Box,
+    Main Zone PTAC PTAC Mixed Air Outlet,
+    Main Zone PTAC PTAC Outside Air Inlet,
+    Main Zone PTAC PTAC Relief Air Outlet,
+    Main Zone PTAC PTAC Return;
+
+OutdoorAir:Node,
+    Main Zone PTAC PTAC Outside Air Inlet,
+    -1;
+
+Coil:Cooling:DX:SingleSpeed,
+    Main Zone PTAC PTAC Cooling Coil,
+    ,
+    autosize,
+    autosize,
+    3,
+    autosize,
+    ,
+    ,
+    Main Zone PTAC PTAC Mixed Air Outlet,
+    Main Zone PTAC PTAC Cooling Coil Outlet,
+    Main Zone PTAC PTAC Cooling Coil Cap-FT,
+    Main Zone PTAC PTAC Cooling Coil Cap-FF,
+    Main Zone PTAC PTAC Cooling Coil EIR-FT,
+    Main Zone PTAC PTAC Cooling Coil EIR-FF,
+    Main Zone PTAC PTAC Cooling Coil Coil PLF,
+    ,
+    0,
+    0,
+    0,
+    0,
+    Main Zone PTAC PTAC Cooling Coil Condenser Inlet,
+    AirCooled,
+    0,
+    ,
+    0,
+    0,
+    ,
+    10;
+
+Curve:Biquadratic,
+    Main Zone PTAC PTAC Cooling Coil Cap-FT,
+    0.942587793,
+    0.009543347,
+    0.00068377,
+    -0.011042676,
+    0.000005249,
+    -0.00000972,
+    12.77778,
+    23.88889,
+    18.0,
+    46.11111;
+
+Curve:Quadratic,
+    Main Zone PTAC PTAC Cooling Coil Cap-FF,
+    0.8,
+    0.2,
+    0,
+    0.5,
+    1.5;
+
+Curve:Biquadratic,
+    Main Zone PTAC PTAC Cooling Coil EIR-FT,
+    0.342414409,
+    0.034885008,
+    -0.0006237,
+    0.004977216,
+    0.000437951,
+    -0.000728028,
+    12.77778,
+    23.88889,
+    18.0,
+    46.11111;
+
+Curve:Quadratic,
+    Main Zone PTAC PTAC Cooling Coil EIR-FF,
+    1.1552,
+    -0.1808,
+    0.0256,
+    0.5,
+    1.5;
+
+Curve:Quadratic,
+    Main Zone PTAC PTAC Cooling Coil Coil PLF,
+    0.85,
+    0.15,
+    0,
+    0,
+    1;
+
+OutdoorAir:Node,
+    Main Zone PTAC PTAC Cooling Coil Condenser Inlet,
+    -1;
+
+Coil:Heating:Electric,
+    Main Zone PTAC PTAC Heating Coil,
+    ,
+    1,
+    autosize,
+    Main Zone PTAC PTAC Cooling Coil Outlet,
+    Main Zone PTAC PTAC Heating Coil Outlet,
+    ;
+
+
+!=======================================================================
+! OUTPUT VARIABLES
+!=======================================================================
+
+Output:Variable,
+    Main Zone,
+    Zone Mean Air Temperature,
+    Timestep;
+
+
+Output:Variable,
+    Main Zone,
+    Zone Air Relative Humidity,
+    Timestep;
+
+
+Output:Variable,
+    *,
+    Site Outdoor Air Drybulb Temperature,
+    Timestep;
+
+
+Output:Variable,
+    *,
+    Site Outdoor Air Relative Humidity,
+    Timestep;
+
+
+Output:Variable,
+    Main Zone,
+    Zone Thermostat Cooling Setpoint Temperature,
+    Timestep;
+
+
+Output:Variable,
+    Main Zone,
+    Zone Thermostat Heating Setpoint Temperature,
+    Timestep;
+
+
+Output:Variable,
+    Main Zone,
+    Zone Air System Sensible Cooling Rate,
+    Timestep;
+
+
+Output:Variable,
+    Main Zone,
+    Zone Air System Sensible Cooling Energy,
+    Timestep;
+
+
+Output:Variable,
+    Main Zone,
+    Zone Air System Sensible Heating Rate,
+    Timestep;
+
+
+Output:Variable,
+    Main Zone,
+    Zone Air System Sensible Heating Energy,
+    Timestep;
+
+
+!=======================================================================
+! ENERGY METERS
+!=======================================================================
+
+Output:Meter,
+    Electricity:HVAC,
+    Timestep;
+
+
+Output:Meter,
+    Electricity:Facility,
+    Timestep;
+
+
+Output:Meter,
+    Cooling:Electricity,
+    Timestep;
+
+
+!=======================================================================
+! REPORT VARIABLE DICTIONARY
+!
+! This will help us identify the exact variables generated by the
+! expanded PTAC model.
+!=======================================================================
+
+Output:VariableDictionary,
+    Regular;
+
+
+!=======================================================================
+! SUMMARY REPORTS
+!=======================================================================
+
+Output:Table:SummaryReports,
+    AllSummary;
+
+
+OutputControl:Table:Style,
+    Comma;
+
+
+Output:SQLite,
+    SimpleAndTabular;
+
+
+!=======================================================================
+! RUN PERIOD
+!
+! First test:
+! July 1 - July 3
+!
+! After successful validation we will change this to:
+! January 1 - December 31
+!=======================================================================
+
+RunPeriod,
+    Dubai July Test,
+    1,
+    1,
+    ,
+    12,
+    31,
+    ,
+    Tuesday,
+    Yes,
+    Yes,
+    No,
+    Yes,
+    No;
+
+
+!=======================================================================
+! END
+!=======================================================================

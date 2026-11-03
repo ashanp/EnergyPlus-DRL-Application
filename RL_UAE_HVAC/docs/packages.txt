@@ -1,0 +1,5 @@
+conda create command
+conda create -n rl_energyplus python=3.11 -c conda-forge
+
+pip install pandas
+pip install numpy matplotlib

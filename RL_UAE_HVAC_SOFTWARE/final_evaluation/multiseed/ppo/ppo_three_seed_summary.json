@@ -1,0 +1,30 @@
+{
+  "cooling_delivery_pct": {
+    "mean": 96.04527040275097,
+    "sample_sd": 0.6796534836745861
+  },
+  "unmet_cooling_kwh_th": {
+    "mean": 225.02822119227048,
+    "sample_sd": 38.673616473173624
+  },
+  "pump_energy_kwh": {
+    "mean": 165.9208860592437,
+    "sample_sd": 15.478012967116632
+  },
+  "mean_active_flow_kg_s": {
+    "mean": 0.37500218160725646,
+    "sample_sd": 0.03152525666667537
+  },
+  "mean_active_delta_t_c": {
+    "mean": 2.090634645775069,
+    "sample_sd": 0.1662626015976551
+  },
+  "pump_saving_vs_baseline_pct": {
+    "mean": 19.114318453105025,
+    "sample_sd": 7.545461319377756
+  },
+  "flow_reduction_vs_baseline_pct": {
+    "mean": 24.444226792436197,
+    "sample_sd": 6.351736762726801
+  }
+}

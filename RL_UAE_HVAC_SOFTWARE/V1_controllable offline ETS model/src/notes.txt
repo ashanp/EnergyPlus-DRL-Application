@@ -1,0 +1,7 @@
+
+
+python ets_model_v1.py /Users/asperera/EnergyPlus/RL_UAE_HVAC_SOFTWARE/eplusout.csv --mode fixed --action 0.65
+
+python ets_model_v1.py /Users/asperera/EnergyPlus/RL_UAE_HVAC_SOFTWARE/eplusout.csv --mode baseline
+
+python ets_model_v1.py /Users/asperera/EnergyPlus/RL_UAE_HVAC_SOFTWARE/eplusout.csv --mode minimum_feasible

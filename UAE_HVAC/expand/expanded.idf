@@ -1,0 +1,1130 @@
+!=======================================================================
+! UAE DUBAI HVAC BASELINE MODEL
+! EnergyPlus 26.1.0
+!
+! Location:
+!   Dubai World Central / Al Maktoum International Airport
+!
+! Weather:
+!   ARE_DU_Dubai.World.Central.Intl.AP-Maktoum.Intl.AP.411945_TMYx.2007-2021.epw
+!
+! Building:
+!   Single zone
+!   10m x 10m x 3m
+!   100 m2 floor area
+!   300 m3 approximate volume
+!
+! HVAC:
+!   Packaged Terminal Air Conditioner
+!   DX cooling
+!   Electric heating
+!   Autosized
+!
+! Cooling thermostat:
+!   24 C
+!
+! Designed as a baseline for later:
+!   PPO / DQN HVAC optimisation
+!
+!=======================================================================
+
+
+Version,
+    26.1;
+
+
+!=======================================================================
+! SIMULATION CONTROL
+!=======================================================================
+
+SimulationControl,
+    Yes,             !- Do Zone Sizing Calculation
+    Yes,             !- Do System Sizing Calculation
+    No,              !- Do Plant Sizing Calculation
+    Yes,             !- Run Simulation for Sizing Periods
+    Yes;             !- Run Simulation for Weather File Run Periods
+
+
+Timestep,
+    4;
+
+
+!=======================================================================
+! BUILDING
+!=======================================================================
+
+Building,
+    UAE Dubai Baseline,
+    0.0,
+    Suburbs,
+    0.04,
+    0.4,
+    FullExteriorWithReflections,
+    25;
+
+
+!=======================================================================
+! LOCATION
+!
+! The EPW file supplied with -w is the actual weather source.
+!=======================================================================
+
+Site:Location,
+    Dubai World Central,
+    24.896,
+    55.161,
+    4.0,
+    5.0;
+! 
+! 
+!=======================================================================
+! GROUND TEMPERATURE
+!=======================================================================
+! 
+! Site:GroundTemperature:BuildingSurface,
+!     24.0,
+!     24.0,
+!     25.0,
+!     27.0,
+!     30.0,
+!     32.0,
+!     33.0,
+!     33.0,
+!     32.0,
+!     30.0,
+!     27.0,
+!     25.0;
+
+
+!=======================================================================
+! GLOBAL GEOMETRY
+!=======================================================================
+
+GlobalGeometryRules,
+    UpperLeftCorner,
+    CounterClockWise,
+    World;
+
+
+!=======================================================================
+! ZONE
+!=======================================================================
+
+Zone,
+    Main Zone,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1,
+    1,
+    3.0,
+    300.0;
+
+
+!=======================================================================
+! MATERIALS
+!=======================================================================
+
+Material,
+    External Wall Material,
+    MediumRough,
+    0.200,
+    1.40,
+    2200.0,
+    900.0,
+    0.90,
+    0.70,
+    0.70;
+
+
+Material,
+    Roof Material,
+    MediumRough,
+    0.180,
+    1.40,
+    2200.0,
+    900.0,
+    0.90,
+    0.70,
+    0.70;
+
+
+Material,
+    Floor Material,
+    MediumRough,
+    0.150,
+    1.40,
+    2200.0,
+    900.0,
+    0.90,
+    0.70,
+    0.70;
+
+
+!=======================================================================
+! WINDOW
+!=======================================================================
+
+WindowMaterial:SimpleGlazingSystem,
+    Double Glazing,
+    2.70,
+    0.40,
+    0.30;
+
+
+!=======================================================================
+! CONSTRUCTIONS
+!=======================================================================
+
+Construction,
+    External Wall Construction,
+    External Wall Material;
+
+
+Construction,
+    Roof Construction,
+    Roof Material;
+
+
+Construction,
+    Floor Construction,
+    Floor Material;
+
+
+Construction,
+    Window Construction,
+    Double Glazing;
+
+
+!=======================================================================
+! SOUTH WALL
+!=======================================================================
+
+BuildingSurface:Detailed,
+    South Wall,
+    Wall,
+    External Wall Construction,
+    Main Zone,
+    Outdoors,
+    ,
+    SunExposed,
+    WindExposed,
+    0.5,
+    4,
+    0.0,
+    0.0,
+    3.0,
+    10.0,
+    0.0,
+    3.0,
+    10.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0;
+
+
+!=======================================================================
+! NORTH WALL
+!=======================================================================
+
+BuildingSurface:Detailed,
+    North Wall,
+    Wall,
+    External Wall Construction,
+    Main Zone,
+    Outdoors,
+    ,
+    SunExposed,
+    WindExposed,
+    0.5,
+    4,
+    10.0,
+    10.0,
+    3.0,
+    0.0,
+    10.0,
+    3.0,
+    0.0,
+    10.0,
+    0.0,
+    10.0,
+    10.0,
+    0.0;
+
+
+!=======================================================================
+! EAST WALL
+!=======================================================================
+
+BuildingSurface:Detailed,
+    East Wall,
+    Wall,
+    External Wall Construction,
+    Main Zone,
+    Outdoors,
+    ,
+    SunExposed,
+    WindExposed,
+    0.5,
+    4,
+    10.0,
+    0.0,
+    0.0,
+    10.0,
+    0.0,
+    3.0,
+    10.0,
+    10.0,
+    3.0,
+    10.0,
+    10.0,
+    0.0;
+
+
+!=======================================================================
+! WEST WALL
+!=======================================================================
+
+BuildingSurface:Detailed,
+    West Wall,
+    Wall,
+    External Wall Construction,
+    Main Zone,
+    Outdoors,
+    ,
+    SunExposed,
+    WindExposed,
+    0.5,
+    4,
+    0.0,
+    10.0,
+    3.0,
+    0.0,
+    0.0,
+    3.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    10.0,
+    0.0;
+
+
+!=======================================================================
+! ROOF
+!=======================================================================
+
+BuildingSurface:Detailed,
+    Roof,
+    Roof,
+    Roof Construction,
+    Main Zone,
+    Outdoors,
+    ,
+    SunExposed,
+    WindExposed,
+    0.0,
+    4,
+    0.0,
+    0.0,
+    3.0,
+    10.0,
+    0.0,
+    3.0,
+    10.0,
+    10.0,
+    3.0,
+    0.0,
+    10.0,
+    3.0;
+
+
+!=======================================================================
+! FLOOR
+!=======================================================================
+
+BuildingSurface:Detailed,
+    Floor,
+    Floor,
+    Floor Construction,
+    Main Zone,
+    Ground,
+    ,
+    NoSun,
+    NoWind,
+    0.0,
+    4,
+    0.0,
+    0.0,
+    0.0,
+    10.0,
+    0.0,
+    0.0,
+    10.0,
+    10.0,
+    0.0,
+    0.0,
+    10.0,
+    0.0;
+
+
+!=======================================================================
+! WINDOWS
+!
+! Each window = 4m x 1.5m = 6m2
+! Four windows = 24m2
+!=======================================================================
+
+
+!---------------- SOUTH WINDOW ----------------
+
+FenestrationSurface:Detailed,
+    South Window,
+    Window,
+    Window Construction,
+    South Wall,
+    ,
+    1.0,
+    4,
+    3.0,
+    0.0,
+    1.0,
+    7.0,
+    0.0,
+    1.0,
+    7.0,
+    0.0,
+    2.5,
+    3.0,
+    0.0,
+    2.5;
+
+
+!---------------- NORTH WINDOW ----------------
+
+FenestrationSurface:Detailed,
+    North Window,
+    Window,
+    Window Construction,
+    North Wall,
+    ,
+    1.0,
+    4,
+    7.0,
+    10.0,
+    1.0,
+    3.0,
+    10.0,
+    1.0,
+    3.0,
+    10.0,
+    2.5,
+    7.0,
+    10.0,
+    2.5;
+
+
+!---------------- EAST WINDOW ----------------
+
+FenestrationSurface:Detailed,
+    East Window,
+    Window,
+    Window Construction,
+    East Wall,
+    ,
+    1.0,
+    4,
+    10.0,
+    3.0,
+    1.0,
+    10.0,
+    7.0,
+    1.0,
+    10.0,
+    7.0,
+    2.5,
+    10.0,
+    3.0,
+    2.5;
+
+
+!---------------- WEST WINDOW ----------------
+
+FenestrationSurface:Detailed,
+    West Window,
+    Window,
+    Window Construction,
+    West Wall,
+    ,
+    1.0,
+    4,
+    0.0,
+    7.0,
+    1.0,
+    0.0,
+    3.0,
+    1.0,
+    0.0,
+    3.0,
+    2.5,
+    0.0,
+    7.0,
+    2.5;
+
+
+!=======================================================================
+! SCHEDULE TYPE LIMITS
+!=======================================================================
+
+ScheduleTypeLimits,
+    Fraction,
+    0.0,
+    1.0,
+    Continuous;
+
+
+ScheduleTypeLimits,
+    Temperature,
+    -60.0,
+    200.0,
+    Continuous;
+
+
+ScheduleTypeLimits,
+    Control Type,
+    0,
+    4,
+    Discrete;
+
+
+!=======================================================================
+! OCCUPANCY
+!=======================================================================
+
+Schedule:Compact,
+    Occupancy Schedule,
+    Fraction,
+    Through: 12/31,
+    For: Weekdays,
+    Until: 08:00,
+    0.0,
+    Until: 09:00,
+    0.5,
+    Until: 18:00,
+    1.0,
+    Until: 19:00,
+    0.5,
+    Until: 24:00,
+    0.0,
+    For: Weekends,
+    Until: 24:00,
+    0.0;
+
+
+People,
+    Main Zone Occupants,
+    Main Zone,
+    Occupancy Schedule,
+    People,
+    10,
+    ,
+    0.3,
+    0.5;
+
+
+!=======================================================================
+! LIGHTING
+!=======================================================================
+
+Schedule:Compact,
+    Lighting Schedule,
+    Fraction,
+    Through: 12/31,
+    For: Weekdays,
+    Until: 08:00,
+    0.1,
+    Until: 09:00,
+    0.5,
+    Until: 18:00,
+    1.0,
+    Until: 19:00,
+    0.5,
+    Until: 24:00,
+    0.1,
+    For: Weekends,
+    Until: 24:00,
+    0.1;
+
+
+Lights,
+    Main Zone Lights,
+    Main Zone,
+    Lighting Schedule,
+    LightingLevel,
+    800.0,
+    ,
+    0.42,
+    0.18,
+    1.0;
+
+
+!=======================================================================
+! ELECTRICAL EQUIPMENT
+!=======================================================================
+
+Schedule:Compact,
+    Equipment Schedule,
+    Fraction,
+    Through: 12/31,
+    For: Weekdays,
+    Until: 08:00,
+    0.1,
+    Until: 09:00,
+    0.5,
+    Until: 18:00,
+    1.0,
+    Until: 19:00,
+    0.5,
+    Until: 24:00,
+    0.1,
+    For: Weekends,
+    Until: 24:00,
+    0.1;
+
+
+ElectricEquipment,
+    Main Zone Equipment,
+    Main Zone,
+    Equipment Schedule,
+    EquipmentLevel,
+    1000.0,
+    ,
+    0.30,
+    0.0,
+    General;
+
+
+!=======================================================================
+! INFILTRATION
+!=======================================================================
+
+Schedule:Constant,
+    Infiltration Schedule,
+    Fraction,
+    1.0;
+
+
+ZoneInfiltration:DesignFlowRate,
+    Main Zone Infiltration,
+    Main Zone,
+    Infiltration Schedule,
+    Flow/Zone,
+    0.0003,
+    ,
+    ,
+    ,
+    0.0;
+
+
+!=======================================================================
+! THERMOSTAT
+!
+! Heating = 20 C
+! Cooling = 24 C
+!=======================================================================
+
+Schedule:Compact,
+    Heating Setpoint Schedule,
+    Temperature,
+    Through: 12/31,
+    For: AllDays,
+    Until: 24:00,
+    20.0;
+
+
+Schedule:Compact,
+    Cooling Setpoint Schedule,
+    Temperature,
+    Through: 12/31,
+    For: AllDays,
+    Until: 24:00,
+    24.0;
+
+
+Schedule:Compact,
+    Thermostat Control Schedule,
+    Control Type,
+    Through: 12/31,
+    For: AllDays,
+    Until: 24:00,
+    4;
+
+
+ThermostatSetpoint:DualSetpoint,
+    Main Zone Dual Setpoint,
+    Heating Setpoint Schedule,
+    Cooling Setpoint Schedule;
+
+
+ZoneControl:Thermostat,
+    Main Zone Thermostat,
+    Main Zone,
+    Thermostat Control Schedule,
+    DualSetpoint,
+    Main Zone Dual Setpoint;
+
+
+!=======================================================================
+! HVAC TEMPLATE THERMOSTAT
+!
+! This is intentionally omitted because the direct thermostat above
+! is easier to use later with the EnergyPlus Python API.
+!=======================================================================
+
+
+!=======================================================================
+! HVAC AVAILABILITY
+!=======================================================================
+
+Schedule:Constant,
+    HVAC Availability Schedule,
+    Fraction,
+    1.0;
+! 
+! 
+!=======================================================================
+! HVAC
+!
+! Use EnergyPlus HVAC Template to generate a PTAC with DX cooling.
+!
+! Cooling coil:
+!   DX
+!
+! Heating:
+!   Electric
+!
+! Outdoor air:
+!   0.005 m3/s
+!
+! Cooling setpoint is controlled by the thermostat above.
+!=======================================================================
+! 
+! HVACTemplate:Zone:PTAC,
+!     Main Zone PTAC,
+!     Main Zone,
+!     HVAC Availability Schedule,
+!     ,
+!     ,
+!     ,
+!     ,
+!     ,
+!     ,
+!     ,
+!     ,
+!     ,
+!     ,
+!     ,
+!     ,
+!     ,
+!     ,
+!     ,
+!     ,
+!     ;
+
+
+!=======================================================================
+! OUTPUT VARIABLES
+!=======================================================================
+
+Output:Variable,
+    Main Zone,
+    Zone Mean Air Temperature,
+    Timestep;
+
+
+Output:Variable,
+    Main Zone,
+    Zone Air Relative Humidity,
+    Timestep;
+
+
+Output:Variable,
+    *,
+    Site Outdoor Air Drybulb Temperature,
+    Timestep;
+
+
+Output:Variable,
+    *,
+    Site Outdoor Air Relative Humidity,
+    Timestep;
+
+
+Output:Variable,
+    Main Zone,
+    Zone Thermostat Cooling Setpoint Temperature,
+    Timestep;
+
+
+Output:Variable,
+    Main Zone,
+    Zone Thermostat Heating Setpoint Temperature,
+    Timestep;
+
+
+Output:Variable,
+    Main Zone,
+    Zone Air System Sensible Cooling Rate,
+    Timestep;
+
+
+Output:Variable,
+    Main Zone,
+    Zone Air System Sensible Cooling Energy,
+    Timestep;
+
+
+Output:Variable,
+    Main Zone,
+    Zone Air System Sensible Heating Rate,
+    Timestep;
+
+
+Output:Variable,
+    Main Zone,
+    Zone Air System Sensible Heating Energy,
+    Timestep;
+
+
+!=======================================================================
+! ENERGY METERS
+!=======================================================================
+
+Output:Meter,
+    Electricity:HVAC,
+    Timestep;
+
+
+Output:Meter,
+    Electricity:Facility,
+    Timestep;
+
+
+Output:Meter,
+    Electricity:Cooling,
+    Timestep;
+
+
+!=======================================================================
+! REPORT VARIABLE DICTIONARY
+!
+! This will help us identify the exact variables generated by the
+! expanded PTAC model.
+!=======================================================================
+
+Output:VariableDictionary,
+    Regular;
+
+
+!=======================================================================
+! SUMMARY REPORTS
+!=======================================================================
+
+Output:Table:SummaryReports,
+    AllSummary;
+
+
+OutputControl:Table:Style,
+    Comma;
+
+
+Output:SQLite,
+    SimpleAndTabular;
+
+
+!=======================================================================
+! RUN PERIOD
+!
+! First test:
+! July 1 - July 3
+!
+! After successful validation we will change this to:
+! January 1 - December 31
+!=======================================================================
+
+RunPeriod,
+    Dubai July Test,
+    7,
+    1,
+    7,
+    3,
+    Tuesday,
+    Yes,
+    Yes,
+    No,
+    Yes,
+    No;
+! 
+! Cannot find Energy+.idd as specified in Energy+.ini.
+! 
+! Since the Energy+.IDD file cannot be read no range or choice checking was performed.
+! 
+! -------------------------------------------------------------
+! New objects created from ExpandObjects
+! -------------------------------------------------------------
+! 
+
+ScheduleTypeLimits,
+  HVACTemplate Any Number;                                 !- Name
+
+Schedule:Compact,
+  HVACTemplate-Always 4,                                   !- Name
+  HVACTemplate Any Number,                                 !- Schedule Type Limits Name
+  Through: 12/31,                                          !- Field 1
+  For: AllDays,                                            !- Field 2
+  Until: 24:00,                                            !- Field 3
+  4;                                                       !- Field 4
+
+ZoneControl:Thermostat,
+  Main Zone PTAC Thermostat,                               !- Name
+  Main Zone PTAC,                                          !- Zone or ZoneList Name
+  HVACTemplate-Always 4,                                   !- Control Type Schedule Name
+  ThermostatSetpoint:DualSetpoint,                         !- Control Object Type
+  Main Zone Dual SP Control;                               !- Control Name
+
+DesignSpecification:OutdoorAir,
+  SZ DSOA Main Zone PTAC,                                  !- Name
+  Flow/Person,                                             !- Outdoor Air Method
+  0.00944,                                                 !- Outdoor Air Flow per Person {m3/s}
+  0.0,                                                     !- Outdoor Air Flow per Zone Floor Area {m3/s-m2}
+  0.0;                                                     !- Outdoor Air Flow per Zone {m3/s}
+
+Sizing:Zone,
+  Main Zone PTAC,                                          !- Zone or ZoneList Name
+  SupplyAirTemperature,                                    !- Zone Cooling Design Supply Air Temperature Input Method
+  14.0,                                                    !- Zone Cooling Design Supply Air Temperature {C}
+  11.11,                                                   !- Zone Cooling Design Supply Air Temperature Difference {delta C}
+  SupplyAirTemperature,                                    !- Zone Heating Design Supply Air Temperature Input Method
+  50.0,                                                    !- Zone Heating Design Supply Air Temperature {C}
+  ,                                                        !- Zone Heating Design Supply Air Temperature Difference {delta C}
+  0.008,                                                   !- Zone Cooling Design Supply Air Humidity Ratio {kg-H20/kg-air}
+  0.008,                                                   !- Zone Heating Design Supply Air Humidity Ratio {kg-H2O/kg-air}
+  SZ DSOA Main Zone PTAC,                                  !- Design Specification Outdoor Air Object Name
+  ,                                                        !- Zone Heating Sizing Factor
+  ,                                                        !- Zone Cooling Sizing Factor
+  Flow/Zone,                                               !- Cooling Design Air Flow Method
+  HVAC Availability Schedule,                              !- Cooling Design Air Flow Rate {m3/s}
+  ,                                                        !- Cooling Minimum Air Flow per Zone Floor Area {m3/s-m2}
+  ,                                                        !- Cooling Minimum Air Flow {m3/s}
+  0,                                                       !- Cooling Minimum Air Flow Fraction {}
+  DesignDay,                                               !- Heating Design Air Flow Method
+  0,                                                       !- Heating Design Air Flow Rate {m3/s}
+  ,                                                        !- Heating Maximum Air Flow per Zone Floor Area {m3/s-m2}
+  ,                                                        !- Heating Maximum Air Flow {m3/s}
+  0,                                                       !- Heating Maximum Air Flow Fraction {}
+  SZ DSZAD Main Zone PTAC;                                 !- Design Specification Zone Air Distribution Object Name
+
+DesignSpecification:ZoneAirDistribution,
+  SZ DSZAD Main Zone PTAC,                                 !- Name
+  1,                                                       !- Zone Air Distribution Effectiveness in Cooling Mode {}
+  1;                                                       !- Zone Air Distribution Effectiveness in Heating Mode {}
+
+ZoneHVAC:EquipmentConnections,
+  Main Zone PTAC,                                          !- Zone Name
+  Main Zone PTAC Equipment,                                !- Zone Conditioning Equipment List Name
+  Main Zone PTAC PTAC Supply Inlet,                        !- Zone Air Inlet Node or NodeList Name
+  Main Zone PTAC PTAC Return,                              !- Zone Air Exhaust Node or NodeList Name
+  Main Zone PTAC Zone Air Node,                            !- Zone Air Node Name
+  Main Zone PTAC Return Outlet;                            !- Zone Return Air Node Name
+
+ZoneHVAC:EquipmentList,
+  Main Zone PTAC Equipment,                                !- Name
+  SequentialLoad,                                          !- Load Distribution Scheme
+  ZoneHVAC:PackagedTerminalAirConditioner,                 !- Zone Equipment Object Type
+  Main Zone PTAC PTAC,                                     !- Zone Equipment Name
+  1,                                                       !- Zone Equipment Cooling Sequence
+  1,                                                       !- Zone Equipment Heating or No-Load Sequence
+  ,                                                        !- Zone Equipment Sequential Cooling Fraction Schedule Name
+  ;                                                        !- Zone Equipment Sequential Heating Fraction Schedule Name
+
+ZoneHVAC:PackagedTerminalAirConditioner,
+  Main Zone PTAC PTAC,                                     !- Name
+  ,                                                        !- Availability Schedule Name
+  Main Zone PTAC PTAC Return,                              !- Air Inlet Node Name
+  Main Zone PTAC PTAC Supply Inlet,                        !- Air Outlet Node Name
+  OutdoorAir:Mixer,                                        !- Outdoor Air Mixer Object Type
+  Main Zone PTAC PTAC OA Mixing Box,                       !- Outdoor Air Mixer Name
+  autosize,                                                !- Cooling Supply Air Flow Rate {m3/s}
+  autosize,                                                !- Heating Supply Air Flow Rate {m3/s}
+  ,                                                        !- No Load Supply Air Flow Rate {m3/s}
+  ,                                                        !- No Load Supply Air Flow Rate Control Set To Low Speed
+  autosize,                                                !- Cooling Outdoor Air Flow Rate {m3/s}
+  autosize,                                                !- Heating Outdoor Air Flow Rate {m3/s}
+  autosize,                                                !- No Load Outdoor Air Flow Rate {m3/s}
+  Fan:OnOff,                                               !- Supply Air Fan Object Type
+  Main Zone PTAC PTAC Supply Fan,                          !- Supply Air Fan Name
+  Coil:Heating:Electric,                                   !- Heating Coil Object Type
+  Main Zone PTAC PTAC Heating Coil,                        !- Heating Coil Name
+  Coil:Cooling:DX:SingleSpeed,                             !- Cooling Coil Object Type
+  Main Zone PTAC PTAC Cooling Coil,                        !- Cooling Coil Name
+  DrawThrough,                                             !- Fan Placement
+  HVACTemplate-Always 0;                                   !- Supply Air Fan Operating Mode Schedule Name
+
+Schedule:Compact,
+  HVACTemplate-Always 0,                                   !- Name
+  HVACTemplate Any Number,                                 !- Schedule Type Limits Name
+  Through: 12/31,                                          !- Field 1
+  For: AllDays,                                            !- Field 2
+  Until: 24:00,                                            !- Field 3
+  0;                                                       !- Field 4
+
+Fan:OnOff,
+  Main Zone PTAC PTAC Supply Fan,                          !- Name
+  HVACTemplate-Always 1,                                   !- Availability Schedule Name
+  0.7,                                                     !- Fan Efficiency
+  75,                                                      !- Pressure Rise {Pa}
+  autosize,                                                !- Maximum Flow Rate {m3/s}
+  0.9,                                                     !- Motor Efficiency
+  1,                                                       !- Motor in Airstream Fraction
+  Main Zone PTAC PTAC Heating Coil Outlet,                 !- Air Inlet Node Name
+  Main Zone PTAC PTAC Supply Inlet;                        !- Air Outlet Node Name
+
+Schedule:Compact,
+  HVACTemplate-Always 1,                                   !- Name
+  HVACTemplate Any Number,                                 !- Schedule Type Limits Name
+  Through: 12/31,                                          !- Field 1
+  For: AllDays,                                            !- Field 2
+  Until: 24:00,                                            !- Field 3
+  1;                                                       !- Field 4
+
+OutdoorAir:Mixer,
+  Main Zone PTAC PTAC OA Mixing Box,                       !- Name
+  Main Zone PTAC PTAC Mixed Air Outlet,                    !- Mixed Air Node Name
+  Main Zone PTAC PTAC Outside Air Inlet,                   !- Outside Air Stream Node Name
+  Main Zone PTAC PTAC Relief Air Outlet,                   !- Relief Air Stream Node Name
+  Main Zone PTAC PTAC Return;                              !- Return Air Stream Node Name
+
+OutdoorAir:Node,
+  Main Zone PTAC PTAC Outside Air Inlet,                   !- Name
+  -1;                                                      !- Height Above Ground
+
+Coil:Cooling:DX:SingleSpeed,
+  Main Zone PTAC PTAC Cooling Coil,                        !- Name
+  ,                                                        !- Availability Schedule Name
+  autosize,                                                !- Gross Rated Total Cooling Capacity {W}
+  autosize,                                                !- Gross Rated Sensible Heat Ratio
+  3,                                                       !- Rated COP
+  autosize,                                                !- Rated Air Volume Flow Rate {m3/s}
+  ,                                                        !- 2017 Rated Evaporator Fan Power per Volume Flow Rate {W/(m3/s)}
+  ,                                                        !- 2023 Rated Evaporator Fan Power Per Volume Flow Rate {W/(m3/s)}
+  Main Zone PTAC PTAC Mixed Air Outlet,                    !- Air Inlet Node Name
+  Main Zone PTAC PTAC Cooling Coil Outlet,                 !- Air Outlet Node Name
+  Main Zone PTAC PTAC Cooling Coil Cap-FT,                 !- Total Cooling Capacity Modifier Curve (function of temperature)
+  Main Zone PTAC PTAC Cooling Coil Cap-FF,                 !- Total Cooling Capacity Modifier Curve (function of flow fraction)
+  Main Zone PTAC PTAC Cooling Coil EIR-FT,                 !- Energy Input Ratio Modifier Curve (function of temperature)
+  Main Zone PTAC PTAC Cooling Coil EIR-FF,                 !- Energy Input Ratio Modifier Curve (function of flow fraction)
+  Main Zone PTAC PTAC Cooling Coil Coil PLF,               !- Part Load Fraction Correlation (function of part load ratio)
+  ,                                                        !- Minimum Outdoor Dry-Bulb Temperature for Compressor Operation {C}
+  0,                                                       !- Nominal Time for Condensate Removal to Begin
+  0,                                                       !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity
+  0,                                                       !- Maximum Cycling Rate
+  0,                                                       !- Latent Capacity Time Constant
+  Main Zone PTAC PTAC Cooling Coil Condenser Inlet,        !- Condenser Air Inlet Node Name
+  AirCooled,                                               !- Condenser Type
+  0,                                                       !- Evaporative Condenser Effectiveness
+  ,                                                        !- Evaporative Condenser Air Flow Rate
+  0,                                                       !- Evaporative Condenser Pump Rated Power Consumption
+  0,                                                       !- Crankcase Heater Capacity
+  ,                                                        !- Crankcase Heater Capacity Function of Temperature Curve Name
+  10;                                                      !- Maximum Outdoor Dry-Bulb Temperature for Crankcase Heater Operation
+
+Curve:Biquadratic,
+  Main Zone PTAC PTAC Cooling Coil Cap-FT,                 !- Name
+  0.942587793,                                             !- Coefficient1 Constant
+  0.009543347,                                             !- Coefficient2 x
+  0.00068377,                                              !- Coefficient3 x**2
+  -0.011042676,                                            !- Coefficient4 y
+  0.000005249,                                             !- Coefficient5 y**2
+  -0.00000972,                                             !- Coefficient6 x*y
+  12.77778,                                                !- Minimum Value of x
+  23.88889,                                                !- Maximum Value of x
+  18.0,                                                    !- Minimum Value of y
+  46.11111;                                                !- Maximum Value of y
+
+Curve:Quadratic,
+  Main Zone PTAC PTAC Cooling Coil Cap-FF,                 !- Name
+  0.8,                                                     !- Coefficient1 Constant
+  0.2,                                                     !- Coefficient2 x
+  0,                                                       !- Coefficient3 x**2
+  0.5,                                                     !- Minimum Value of x
+  1.5;                                                     !- Maximum Value of x
+
+Curve:Biquadratic,
+  Main Zone PTAC PTAC Cooling Coil EIR-FT,                 !- Name
+  0.342414409,                                             !- Coefficient1 Constant
+  0.034885008,                                             !- Coefficient2 x
+  -0.0006237,                                              !- Coefficient3 x**2
+  0.004977216,                                             !- Coefficient4 y
+  0.000437951,                                             !- Coefficient5 y**2
+  -0.000728028,                                            !- Coefficient6 x*y
+  12.77778,                                                !- Minimum Value of x
+  23.88889,                                                !- Maximum Value of x
+  18.0,                                                    !- Minimum Value of y
+  46.11111;                                                !- Maximum Value of y
+
+Curve:Quadratic,
+  Main Zone PTAC PTAC Cooling Coil EIR-FF,                 !- Name
+  1.1552,                                                  !- Coefficient1 Constant
+  -0.1808,                                                 !- Coefficient2 x
+  0.0256,                                                  !- Coefficient3 x**2
+  0.5,                                                     !- Minimum Value of x
+  1.5;                                                     !- Maximum Value of x
+
+Curve:Quadratic,
+  Main Zone PTAC PTAC Cooling Coil Coil PLF,               !- Name
+  0.85,                                                    !- Coefficient1 Constant
+  0.15,                                                    !- Coefficient2 x
+  0,                                                       !- Coefficient3 x**2
+  0,                                                       !- Minimum Value of x
+  1;                                                       !- Maximum Value of x
+
+OutdoorAir:Node,
+  Main Zone PTAC PTAC Cooling Coil Condenser Inlet,        !- Name
+  -1;                                                      !- Height Above Ground
+
+Coil:Heating:Electric,
+  Main Zone PTAC PTAC Heating Coil,                        !- Name
+  ,                                                        !- Availability Schedule Name
+  1,                                                       !- Efficiency
+  autosize,                                                !- Nominal Capacity of the Coil {W}
+  Main Zone PTAC PTAC Cooling Coil Outlet,                 !- Air Inlet Node Name
+  Main Zone PTAC PTAC Heating Coil Outlet,                 !- Air Outlet Node Name
+  ;                                                        !- Coil Temp Setpoint Node
+
+Site:GroundTemperature:BuildingSurface,
+  24.0,                                                    !- January Ground Temperature
+  24.0,                                                    !- February Ground Temperature
+  25.0,                                                    !- March Ground Temperature
+  27.0,                                                    !- April Ground Temperature
+  30.0,                                                    !- May Ground Temperature
+  32.0,                                                    !- June Ground Temperature
+  33.0,                                                    !- July Ground Temperature
+  33.0,                                                    !- August Ground Temperature
+  32.0,                                                    !- September Ground Temperature
+  30.0,                                                    !- October Ground Temperature
+  27.0,                                                    !- November Ground Temperature
+  25.0;                                                    !- December Ground Temperature
+
+Output:PreprocessorMessage,
+  ExpandObjects,                                           !- Preprocessor Name
+  Warning,                                                 !- Error Severity
+  Cannot find Energy+.idd as specified in Energy+.ini.;    !- message line
+
+Output:PreprocessorMessage,
+  ExpandObjects,                                           !- Preprocessor Name
+  Warning,                                                 !- Error Severity
+  Since the Energy+.IDD file cannot be read no range or choice checking was,  !- message line
+  performed.;                                              !- message line

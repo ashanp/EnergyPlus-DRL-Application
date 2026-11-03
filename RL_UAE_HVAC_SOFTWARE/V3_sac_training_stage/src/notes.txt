@@ -1,0 +1,6 @@
+python train_sac_v3.py /Users/asperera/EnergyPlus/RL_UAE_HVAC_SOFTWARE/eplusout.csv --timesteps 10000
+
+python train_sac_v3.py /Users/asperera/EnergyPlus/RL_UAE_HVAC_SOFTWARE/eplusout.csv --timesteps 100000
+
+to run the tensorboard go to the tensorboard director where the file is and run below command
+tensorboard --logdir .

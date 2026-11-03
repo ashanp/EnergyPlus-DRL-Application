@@ -1,0 +1,19 @@
+{
+  "test_start_index": 28128,
+  "test_steps": 7103,
+  "total_reward": -5100.914428394903,
+  "required_cooling_kwh_th": 5690.084456987926,
+  "delivered_cooling_kwh_th": 5687.792791004169,
+  "unmet_cooling_kwh_th": 2.2916659837598807,
+  "delivery_fraction_pct": 99.95972527295366,
+  "pump_energy_kwh": 112.94389782166024,
+  "mean_delta_t_c_active": 3.0301612045992266,
+  "median_delta_t_c_active": 3.3118960654709726,
+  "mean_flow_command_active": 0.2848275460983506,
+  "low_delta_t_fraction_pct_active": 98.94883289534704,
+  "training_rows": 28128,
+  "testing_rows": 7104,
+  "training_timesteps": 100000,
+  "seed": 42,
+  "testing_transitions": 7103
+}

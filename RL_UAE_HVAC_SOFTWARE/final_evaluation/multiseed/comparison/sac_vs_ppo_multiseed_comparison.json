@@ -1,0 +1,54 @@
+{
+  "algorithm_summary": [
+    {
+      "algorithm": "SAC",
+      "cooling_delivery_mean_pct": 99.69868025096747,
+      "cooling_delivery_sd_pct": 0.4028255383282183,
+      "unmet_cooling_mean_kwh_th": 17.145348205534745,
+      "unmet_cooling_sd_kwh_th": 22.921113345191895,
+      "pump_energy_mean_kwh": 106.4422538651931,
+      "pump_energy_sd_kwh": 6.69726546288317,
+      "mean_flow_mean_kg_s": 0.24672105932680136,
+      "mean_flow_sd_kg_s": 0.014886461032561553,
+      "delta_t_mean_c": 3.197061878598729,
+      "delta_t_sd_c": 0.1894242205436281,
+      "pump_saving_mean_pct": 48.1098826449155,
+      "pump_saving_sd_pct": 3.264886623570476,
+      "flow_reduction_mean_pct": 50.290421447337565,
+      "flow_reduction_sd_pct": 2.999337414035169
+    },
+    {
+      "algorithm": "PPO",
+      "cooling_delivery_mean_pct": 96.04527040275097,
+      "cooling_delivery_sd_pct": 0.6796534836745861,
+      "unmet_cooling_mean_kwh_th": 225.02822119227048,
+      "unmet_cooling_sd_kwh_th": 38.673616473173624,
+      "pump_energy_mean_kwh": 165.9208860592437,
+      "pump_energy_sd_kwh": 15.478012967116632,
+      "mean_flow_mean_kg_s": 0.37500218160725646,
+      "mean_flow_sd_kg_s": 0.03152525666667537,
+      "delta_t_mean_c": 2.090634645775069,
+      "delta_t_sd_c": 0.1662626015976551,
+      "pump_saving_mean_pct": 19.114318453105025,
+      "pump_saving_sd_pct": 7.545461319377756,
+      "flow_reduction_mean_pct": 24.444226792436197,
+      "flow_reduction_sd_pct": 6.351736762726801
+    }
+  ],
+  "algorithm_differences": {
+    "sac_delivery_advantage_percentage_points": 3.653409848216498,
+    "sac_unmet_cooling_reduction_vs_ppo_pct": 92.38080089924131,
+    "sac_pump_energy_reduction_vs_ppo_pct": 35.84758592285553,
+    "sac_flow_reduction_vs_ppo_pct": 34.208100265081974,
+    "sac_delta_t_increase_vs_ppo_pct": 52.92303153301423,
+    "sac_pump_saving_advantage_percentage_points": 28.995564191810477,
+    "sac_flow_saving_advantage_percentage_points": 25.846194654901367,
+    "ppo_to_sac_unmet_cooling_ratio": 13.124739054271782
+  },
+  "number_of_seeds_per_algorithm": 3,
+  "seeds": [
+    42,
+    7,
+    123
+  ]
+}

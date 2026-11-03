@@ -1,0 +1,11 @@
+{
+  "algorithm": "PPO",
+  "seed": 123,
+  "configured_timesteps": 100000,
+  "actual_timesteps": 100352,
+  "evaluation_count": 20,
+  "best_model_timestep": 10000,
+  "best_mean_eval_reward": -133.78040061004856,
+  "best_model_path": "/Users/ashanperera/EnergyPlus/RL_UAE_HVAC_SOFTWARE/final_evaluation/multiseed/ppo/seed_123/best_model/best_model.zip",
+  "final_model_path": "/Users/ashanperera/EnergyPlus/RL_UAE_HVAC_SOFTWARE/final_evaluation/multiseed/ppo/seed_123/final_model.zip"
+}

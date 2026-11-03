@@ -1,0 +1,22 @@
+{
+  "algorithm": "SAC",
+  "seed": 123,
+  "test_transitions": 7103,
+  "active_cooling_transitions": 6469,
+  "total_reward": -3883.2048484515303,
+  "required_cooling_kwh_th": 5690.084456987935,
+  "delivered_cooling_kwh_th": 5646.54114408001,
+  "unmet_cooling_kwh_th": 43.54331290792384,
+  "cooling_delivery_pct": 99.23475102633232,
+  "pump_energy_kwh": 99.56516189179494,
+  "mean_active_flow_command": 0.2534267883670074,
+  "mean_active_flow_kg_s": 0.2300018283997531,
+  "median_active_flow_kg_s": 0.20570647774807646,
+  "mean_active_delta_t_c": 3.4029444788808556,
+  "median_active_delta_t_c": 3.758313566065066,
+  "unmet_timesteps": 1260,
+  "unmet_timestep_fraction_pct": 17.738983528086724,
+  "max_unmet_w": 746.752953588586,
+  "diagnostic_low_delta_t_fraction_pct": 79.1930746637811,
+  "best_model_timestep": 75000
+}

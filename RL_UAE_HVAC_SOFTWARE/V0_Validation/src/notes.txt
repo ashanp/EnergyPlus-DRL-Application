@@ -1,0 +1,97 @@
+conda activate rl_energyplus
+
+python ets_model_v0.py /Users/asperera/EnergyPlus/RL_UAE_HVAC_SOFTWARE/eplusout.csv
+
+the output is below
+-------------------
+
+ETS Physics Module V0 - PASS
+
+ENERGYPLUS / ETS V0 VALIDATION PARAMETERS
+=========================================
+
+Parameter                           Value       Unit       Explanation
+---------------------------------------------------------------------------------------------------------------
+input_rows                          35232       rows       Total number of 15-minute EnergyPlus records in the
+                                                          input dataset. 35,232 records represent the simulation
+                                                          data available for analysis.
+
+active_cooling_rows                 32023       rows       Number of timesteps during which the cooling system
+                                                          was actively providing cooling. These rows are used
+                                                          for cooling-related hydraulic and ΔT analysis.
+
+design_delta_t_c                    4.0000      °C         Design chilled-water temperature difference (ΔT)
+                                                          configured in the EnergyPlus plant. It represents
+                                                          the design difference between CHW return and supply
+                                                          temperatures.
+
+mean_q_coil_kw                      5.5349      kW         Average cooling rate provided by the FCU chilled-water
+                                                          cooling coil during active cooling periods.
+
+max_q_coil_kw                       14.0084     kW         Maximum cooling rate observed at the cooling coil
+                                                          during the simulation.
+
+mean_delta_t_c                      1.9652      °C         Average actual chilled-water temperature difference
+                                                          across the cooling coil during active cooling.
+                                                          Calculated as return temperature minus supply
+                                                          temperature.
+
+median_delta_t_c                    1.7664      °C         Median actual chilled-water ΔT. Half of the active
+                                                          cooling observations have ΔT below this value and
+                                                          half above it.
+
+min_delta_t_c                       0.1094      °C         Minimum chilled-water ΔT observed during active
+                                                          cooling. Very small ΔT values generally occur under
+                                                          low cooling load and/or relatively high water flow.
+
+max_delta_t_c                       4.0002      °C         Maximum observed chilled-water ΔT. This is effectively
+                                                          equal to the 4°C EnergyPlus design ΔT, allowing for
+                                                          small numerical differences.
+
+mean_coil_flow_kg_s                 0.6115      kg/s       Average chilled-water mass flow rate through the FCU
+                                                          cooling coil during active cooling.
+
+max_coil_flow_kg_s                  0.9077      kg/s       Maximum chilled-water mass flow rate observed through
+                                                          the cooling coil. This value is subsequently used as
+                                                          the approximate maximum flow capacity in the ETS
+                                                          control model.
+
+mean_pump_power_w                   156.2837    W          Average electrical power consumed by the chilled-water
+                                                          circulation pump during active cooling.
+
+max_pump_power_w                    231.9299    W          Maximum electrical power consumed by the chilled-water
+                                                          circulation pump.
+
+water_side_q_mae_w                  23.8110     W          Mean Absolute Error (MAE) between the EnergyPlus
+                                                          cooling-coil cooling rate and the independently
+                                                          calculated water-side cooling rate:
+                                                          Q = mass_flow × Cp × ΔT.
+                                                          The small error indicates strong energy-balance
+                                                          consistency.
+
+median_water_side_q_error_pct       0.3623      %          Median percentage difference between the independently
+                                                          calculated water-side cooling rate and the EnergyPlus
+                                                          cooling-coil cooling rate.
+
+mean_water_side_q_error_pct         0.4245      %          Mean percentage difference between the calculated
+                                                          water-side cooling rate and the EnergyPlus cooling-coil
+                                                          cooling rate. An error below 0.5% indicates very close
+                                                          agreement.
+
+q_water_vs_q_coil_correlation       0.9999      -          Correlation between calculated water-side cooling
+                                                          demand and the EnergyPlus cooling-coil cooling rate.
+                                                          A value close to 1.0 indicates an extremely strong
+                                                          linear relationship and supports validation of the
+                                                          ETS thermodynamic calculation.
+
+low_delta_t_fraction_pct            99.9969     %          Percentage of active cooling observations classified
+                                                          below the current 4°C design-ΔT diagnostic threshold.
+                                                          IMPORTANT: this should NOT be interpreted as 99.9969%
+                                                          regulatory failure. The 4°C value is the EnergyPlus
+                                                          design ΔT and is currently being used only as a
+                                                          diagnostic reference. Part-load operation naturally
+                                                          produces ΔT values below the design value.
+
+
+Validated timestep dataset: /Users/asperera/EnergyPlus/RL_UAE_HVAC_SOFTWARE/ets_v0_validated.csv
+Summary report:             /Users/asperera/EnergyPlus/RL_UAE_HVAC_SOFTWARE/ets_v0_summary.txt

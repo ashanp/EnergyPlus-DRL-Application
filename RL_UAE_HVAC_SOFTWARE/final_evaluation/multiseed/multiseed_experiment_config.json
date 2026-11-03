@@ -1,0 +1,22 @@
+{
+    "experiment": "FE.3 Multi-Seed Robustness Evaluation",
+    "algorithms": [
+        "SAC",
+        "PPO"
+    ],
+    "seeds": [
+        42,
+        7,
+        123
+    ],
+    "training_timesteps": 100000,
+    "episode_steps": 96,
+    "design_delta_t_c": 4.0,
+    "train_test_split": {
+        "training_rows": 28128,
+        "testing_rows": 7104,
+        "test_transitions": 7103
+    },
+    "method": "Same environment, chronological split, reward function, hyperparameters and evaluation procedure as validated V3 SAC and V4 PPO experiments. Only the random seed is varied.",
+    "important_scope": "Offline physics-based EnergyPlus-ETS controller evaluation; not closed-loop EnergyPlus control."
+}

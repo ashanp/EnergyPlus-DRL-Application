@@ -1,0 +1,23 @@
+{
+    "minimum_pump_saving_vs_baseline_pct": 57.60233648503509,
+    "sac_pump_saving_vs_baseline_pct": 44.940360620989665,
+    "ppo_pump_saving_vs_baseline_pct": 27.825449835997862,
+    "sac_pump_above_minimum_pct": 29.86479634561981,
+    "ppo_pump_above_minimum_pct": 70.23237645755411,
+    "sac_pump_reduction_vs_ppo_pct": 23.713221275507244,
+    "minimum_flow_reduction_vs_baseline_pct": 57.60267492301866,
+    "sac_flow_reduction_vs_baseline_pct": 47.90941390926668,
+    "ppo_flow_reduction_vs_baseline_pct": 31.78683338740731,
+    "sac_flow_reduction_vs_ppo_pct": 23.635584334363703,
+    "minimum_delta_t_increase_vs_baseline_pct": 164.3976253384132,
+    "sac_delta_t_increase_vs_baseline_pct": 100.2918567221553,
+    "ppo_delta_t_increase_vs_baseline_pct": 50.869014738564765,
+    "sac_delta_t_increase_vs_ppo_pct": 32.75877559698624,
+    "sac_delivery_pct": 99.95972527295362,
+    "ppo_delivery_pct": 95.596758839908,
+    "sac_delivery_advantage_percentage_points": 4.362966433045614,
+    "additional_ppo_unmet_kwh_th": 248.25647487032958,
+    "ppo_unmet_ratio_vs_sac": 109.33013040714651,
+    "sac_fraction_theoretical_pump_saving_pct": 78.01829467918378,
+    "ppo_fraction_theoretical_pump_saving_pct": 48.306113143911844
+}

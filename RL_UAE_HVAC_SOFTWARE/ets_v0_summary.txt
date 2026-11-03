@@ -1,0 +1,20 @@
+ETS Physics Module V0 - Validation Summary
+============================================
+input_rows: 35232
+active_cooling_rows: 32023
+design_delta_t_c: 4.000000
+mean_q_coil_kw: 5.534940
+max_q_coil_kw: 14.008427
+mean_delta_t_c: 1.965182
+median_delta_t_c: 1.766407
+min_delta_t_c: 0.109404
+max_delta_t_c: 4.000236
+mean_coil_flow_kg_s: 0.611538
+max_coil_flow_kg_s: 0.907702
+mean_pump_power_w: 156.283656
+max_pump_power_w: 231.929936
+water_side_q_mae_w: 23.811002
+median_water_side_q_error_pct: 0.362319
+mean_water_side_q_error_pct: 0.424459
+q_water_vs_q_coil_correlation: 0.999897
+low_delta_t_fraction_pct: 99.996877

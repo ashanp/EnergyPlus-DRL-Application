@@ -1,0 +1,22 @@
+This is the general command 
+---------------------------
+/Applications/EnergyPlus-26-1-0/energyplus -w weather/ARE_DU_Dubai.World.Central.Intl.AP-Maktoum.Intl.AP.411945_TMYx.2007-2021.epw -d output models/5ZoneAirCooled.idf
+
+This is to export the csv Applications
+--------------------------------------
+/Applications/EnergyPlus-26-1-0/energyplus -w weather/ARE_DU_Dubai.World.Central.Intl.AP-Maktoum.Intl.AP.411945_TMYx.2007-2021.epw -r -d output models/5ZoneAirCooled.idf
+
+/Applications/EnergyPlus-26-1-0/energyplus -w weather/ARE_DU_Dubai.World.Central.Intl.AP-Maktoum.Intl.AP.411945_TMYx.2007-2021.epw -r -d output models/UAE_Dubai_Baseline.idf
+
+
+
+Understand the important EnergyPlus outputs
+-------------------------------------------
+For your project, these are particularly useful:
+File	Purpose
+.err	Errors/warnings
+.eso	Raw simulation output
+.csv	Convenient data for Python
+.sql	SQLite database
+.rdd	Available output variables
+.mdd	Available output meters

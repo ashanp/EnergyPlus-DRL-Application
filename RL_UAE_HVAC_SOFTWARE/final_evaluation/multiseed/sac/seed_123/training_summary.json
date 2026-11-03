@@ -1,0 +1,11 @@
+{
+  "algorithm": "SAC",
+  "seed": 123,
+  "configured_timesteps": 100000,
+  "actual_timesteps": 100000,
+  "evaluation_count": 20,
+  "best_model_timestep": 75000,
+  "best_mean_eval_reward": -49.216218940174855,
+  "best_model_path": "/Users/ashanperera/EnergyPlus/RL_UAE_HVAC_SOFTWARE/final_evaluation/multiseed/sac/seed_123/best_model/best_model.zip",
+  "final_model_path": "/Users/ashanperera/EnergyPlus/RL_UAE_HVAC_SOFTWARE/final_evaluation/multiseed/sac/seed_123/final_model.zip"
+}

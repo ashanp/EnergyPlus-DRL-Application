@@ -1,0 +1,8 @@
+Metric,Value (%)
+SAC pump-energy saving vs EnergyPlus,44.940360620989665
+Minimum-feasible pump-energy saving vs EnergyPlus,57.60233648503509
+SAC pump energy above minimum-feasible benchmark,29.86479634561981
+SAC mean active flow reduction vs EnergyPlus,47.909413909266675
+Minimum-feasible mean active flow reduction vs EnergyPlus,57.60267492301866
+SAC mean ΔT increase vs EnergyPlus,100.2918567221553
+SAC cooling delivery,99.95972527295362

@@ -1,0 +1,85 @@
+{
+  "experiment": {
+    "version": "V3",
+    "algorithm": "Soft Actor-Critic (SAC)",
+    "test_start_index": 28128,
+    "test_final_index": 35230,
+    "test_transitions": 7103,
+    "timestep_hours": 0.25,
+    "active_load_threshold_w": 10.0,
+    "design_delta_t_c": 4.0
+  },
+  "energyplus_baseline": {
+    "Controller": "EnergyPlus Baseline",
+    "Transitions": 7103,
+    "Active Transitions": 6469,
+    "Required Cooling (kWh_th)": 5690.084456987935,
+    "Delivered Cooling (kWh_th)": 5690.084456987935,
+    "Unmet Cooling (kWh_th)": null,
+    "Delivery (%)": null,
+    "Pump Energy (kWh)": 205.13010817996013,
+    "Mean Active Flow (kg/s)": 0.4963249870755283,
+    "Median Active Flow (kg/s)": 0.5054076803324613,
+    "Maximum Active Flow (kg/s)": 0.9075671513726058,
+    "Mean Active \u0394T (\u00b0C)": 1.5128728916835914,
+    "Median Active \u0394T (\u00b0C)": 1.4321340930314683,
+    "Minimum Active \u0394T (\u00b0C)": 0.10940427460843072,
+    "Maximum Active \u0394T (\u00b0C)": 2.89268902431726,
+    "Mean Flow Command": null
+  },
+  "minimum_feasible_benchmark": {
+    "Controller": "Minimum Feasible",
+    "Transitions": 7103,
+    "Active Transitions": 6469,
+    "Required Cooling (kWh_th)": 5690.084456987935,
+    "Delivered Cooling (kWh_th)": 5690.084456987935,
+    "Unmet Cooling (kWh_th)": 2.6679103370952362e-14,
+    "Delivery (%)": 100.00000000000001,
+    "Pump Energy (kWh)": 86.97037303402301,
+    "Mean Active Flow (kg/s)": 0.21042851820869737,
+    "Median Active Flow (kg/s)": 0.1878273984890477,
+    "Maximum Active Flow (kg/s)": 0.6442475177730962,
+    "Mean Active \u0394T (\u00b0C)": 4.0,
+    "Median Active \u0394T (\u00b0C)": 4.0,
+    "Minimum Active \u0394T (\u00b0C)": 3.999999999999999,
+    "Maximum Active \u0394T (\u00b0C)": 4.0,
+    "Mean Flow Command": 0.23182549802331578
+  },
+  "sac": {
+    "Controller": "SAC",
+    "Transitions": 7103,
+    "Active Transitions": 6469,
+    "Required Cooling (kWh_th)": 5690.084456987935,
+    "Delivered Cooling (kWh_th)": 5687.792791004174,
+    "Unmet Cooling (kWh_th)": 2.2916659837598807,
+    "Delivery (%)": 99.95972527295362,
+    "Pump Energy (kWh)": 112.94389782165983,
+    "Mean Active Flow (kg/s)": 0.2585385946823991,
+    "Median Active Flow (kg/s)": 0.23672241140475359,
+    "Maximum Active Flow (kg/s)": 0.8073132770568838,
+    "Mean Active \u0394T (\u00b0C)": 3.0301612045992266,
+    "Median Active \u0394T (\u00b0C)": 3.3118960654709726,
+    "Minimum Active \u0394T (\u00b0C)": 0.022878903897194717,
+    "Maximum Active \u0394T (\u00b0C)": 4.0,
+    "Mean Flow Command": 0.2848275460983506
+  },
+  "relative_performance": {
+    "sac_pump_energy_saving_vs_baseline_pct": 44.940360620989665,
+    "minimum_feasible_pump_energy_saving_vs_baseline_pct": 57.60233648503509,
+    "sac_pump_energy_above_minimum_feasible_pct": 29.86479634561981,
+    "sac_mean_flow_reduction_vs_baseline_pct": 47.909413909266675,
+    "minimum_feasible_mean_flow_reduction_vs_baseline_pct": 57.60267492301866,
+    "sac_mean_delta_t_increase_vs_baseline_pct": 100.2918567221553,
+    "sac_cooling_delivery_pct": 99.95972527295362
+  },
+  "representative_high_demand_day": {
+    "day_number": 3,
+    "start_dataset_index": 28416,
+    "end_dataset_index": 28511,
+    "cooling_requirement_kwh_th": 146.59960518189322
+  },
+  "validation": {
+    "sac_reproduction": "PASS"
+  },
+  "interpretation_scope": "Offline physics-based EnergyPlus-ETS controller evaluation. Pump-energy results are model-estimated secondary pumping performance and are not measured closed-loop building energy savings."
+}

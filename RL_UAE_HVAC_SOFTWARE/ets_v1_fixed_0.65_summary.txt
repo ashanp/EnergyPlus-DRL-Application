@@ -1,0 +1,19 @@
+ETS Physics Module V1
+==================================================
+Mode: fixed
+Design Delta-T: 4.0000 C
+Calibrated max flow: 0.907702 kg/s
+Calibrated pump coefficient: 255.557654 W/(kg/s)
+
+active_timesteps: 32023
+mean_flow_command: 0.650000
+mean_flow_kg_s: 0.590006
+mean_delta_t_c: 2.170787
+median_delta_t_c: 2.139086
+mean_pump_power_w: 150.780662
+pump_energy_kwh: 1207.112284
+required_cooling_kwh_th: 44311.347572
+delivered_cooling_kwh_th: 42860.015981
+unmet_cooling_kwh_th: 1451.331591
+delivery_fraction_pct: 96.724695
+low_delta_t_fraction_pct: 87.159229

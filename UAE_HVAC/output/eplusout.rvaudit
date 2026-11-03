@@ -1,0 +1,16 @@
+ ReadVarsESO
+ processing:models/UAE_Dubai_Baseline.rvi
+ input file:output/eplusout.eso
+ output file:output/eplusout.csv
+ getting all vars from:output/eplusout.eso
+  number variables requested for output=          26
+ ReadVars Run Time=00hr 00min  0.76sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:models/UAE_Dubai_Baseline.mvi
+ input file:output/eplusout.mtr
+ output file:output/eplusmtr.csv
+ getting all vars from:output/eplusout.mtr
+  number variables requested for output=           3
+ ReadVars Run Time=00hr 00min  0.16sec
+ ReadVarsESO program completed successfully.
